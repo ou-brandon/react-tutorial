@@ -2,10 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-'use strict';
-
-const e = React.createElement;
-
 function Square(props) {
   return (
     <button className="square" onClick={props.onClick}>
