@@ -103,9 +103,30 @@ class Game extends React.Component {
     if (winner) {
       status = "Winner: " + winner;
     } else {
-      status = "Next player: " + (this.state.xIsNext ? "X" : "O");
+      if(this.state.stepNumber < 9){
+        status = "Next player: " + (this.state.xIsNext ? "X" : "O");
+      } else {
+        status = "The game is a draw";
+      }
+      
     }
-
+    if(!calculateWinner && this.state.stepNumber === 9){
+      
+      return (
+        <div className="game">
+          <div className="game-board">
+            <Board
+              squares={current.squares}
+              onClick={i => this.handleClick(i)}
+            />
+          </div>
+          <div className="game-info">
+            <div>The game is a draw.</div>
+            <ol>{moves}</ol>
+          </div>
+        </div>
+      );
+    }
     return (
       <div className="game">
         <div className="game-board">
@@ -145,8 +166,6 @@ function calculateWinner(squares) {
     }
   }
   return null;
-}
+}  
 
 ReactDOM.render(<Game />, document.getElementById("root"));
-//const domContainer = document.querySelector('#root');
-//ReactDOM.render(e(Game), domContainer);
